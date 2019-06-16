@@ -21,9 +21,8 @@ namespace StratsysMeetingsTestSuite
        
         public IWebElement scrollItem => _driver.FindElementById("id1560617841980");
         public IWebElement timeBtn => _driver.FindElementByXPath("//*[@title = 'Start time']");
+        public IWebElement closeTimeBtn => _driver.FindElementByXPath("//*[@ng-click = '::$ctrl.handleCloseStartTimeClick()']");
 
-
-        SetDateTimePageObject sdtpo = new SetDateTimePageObject(_driver);
 
         public void updateMeetingDateTime(string date, string time)
         {
@@ -37,6 +36,10 @@ namespace StratsysMeetingsTestSuite
 
             dateBtn.Click();
 
+            Thread.Sleep(500);
+
+            SetDateTimePageObject sdtpo = new SetDateTimePageObject(_driver);
+
             sdtpo.setDate(date);
            //----------------------------------------------------------------update time
 
@@ -48,9 +51,10 @@ namespace StratsysMeetingsTestSuite
 
             sdtpo.setTime(time);
 
+            closeTimeBtn.Click();
+
             Thread.Sleep(500);
 
-           
 
 
         }

@@ -18,7 +18,7 @@ namespace StratsysMeetingsTestSuite
             {
 
                 int toYear = Convert.ToInt32(year);
-                int currentYear = Convert.ToInt32(monthDisplay.Substring(5, monthDisplay.Length));
+                int currentYear = Convert.ToInt32(monthDisplay.Substring(5, 4));
 
                 int diff = toYear - currentYear;
 

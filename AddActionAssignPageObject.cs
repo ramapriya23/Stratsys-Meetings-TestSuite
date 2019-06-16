@@ -18,9 +18,7 @@ namespace StratsysMeetingsTestSuite
         public IWebElement inviteUser => _driver.FindElementByXPath("//*[@placeholder = 'Search or invite']");
         public IWebElement inviteNewUserBtn => _driver.FindElementByXPath("//*[@ng-click = '$ctrl.invite()']");
         public IWebElement inviteExistingUserBtn => _driver.FindElementByXPath("//*[@ng-click = '$ctrl.toggleSelect($event, user)']");
-
         public string _actionText =>_driver.FindElementByXPath("//*[@data-placeholder = 'Action']").Text;
-        
         public IWebElement shiftFocus => _driver.FindElementByXPath("//*[@data-placeholder = 'Decision']");
         
 
@@ -32,7 +30,7 @@ namespace StratsysMeetingsTestSuite
 
             responsibleBtn.Click();
 
-            Thread.Sleep(500);
+            Thread.Sleep(1000);
 
             inviteUser.SendKeys(responsibleUser);
 
@@ -48,9 +46,7 @@ namespace StratsysMeetingsTestSuite
             }
 
             Thread.Sleep(1000);
-
-            Console.Write(_actionText);
-
+           
             shiftFocus.SendKeys("");
 
             Thread.Sleep(1000);

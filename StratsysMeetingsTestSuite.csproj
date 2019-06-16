@@ -64,19 +64,19 @@
     <Compile Include="AddActionAssignPageObject.cs" />
     <Compile Include="AddAgendaPageObject.cs" />
     <Compile Include="AddMeetingPageObject.cs" />
-    <Compile Include="DatePicker.cs" />
+    <Compile Include="CheckDate.cs" />
     <Compile Include="LoginPageObjects.cs" />
     <Compile Include="MyConditions.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyCollections.cs" />
     <Compile Include="SetDateTime.cs" />
-    <Compile Include="TestCases.cs" />
     <Compile Include="UpdateDateTimePageObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -60,7 +60,7 @@ namespace StratsysMeetingsTestSuite
             {
                 case 1: break;
 
-                case -1: Console.WriteLine("Cannot create meeting for past year"); break;
+                case -1: Console.WriteLine("Cannot create meeting for past month"); break;
 
                 case 0:
                     {
@@ -90,7 +90,7 @@ namespace StratsysMeetingsTestSuite
 
             timeTextbox.SendKeys(time);
 
-            timeTextbox.SendKeys(Keys.Enter);
+            //timeTextbox.SendKeys(Keys.Enter);
 
             Thread.Sleep(1000);
         }
