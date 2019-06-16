@@ -13,7 +13,7 @@ namespace StratsysMeetingsTestSuite
 {
     public class AddMeetingPageObject
     {
-        private  RemoteWebDriver _driver;
+        private  static RemoteWebDriver _driver;
         public AddMeetingPageObject(IWebDriver driver) => _driver = (RemoteWebDriver)driver;
         public  IWebElement createMeetingBtn => _driver.FindElementByXPath("//*[@value = 'Create meeting']");
         public  IWebElement Name => _driver.FindElementByXPath("//*[@data-placeholder = 'Name *']");
@@ -21,11 +21,17 @@ namespace StratsysMeetingsTestSuite
         public  IWebElement Location => _driver.FindElementByXPath("//*[@data-placeholder='Location']");
         public  IWebElement createBtn => _driver.FindElementByXPath("//*[@value='Create']");
 
-        public  AddAgendaPageObject AddMeeting(string meetingName , string meetingDescription, string meetingLocation)
+        public IWebElement dateBtn => _driver.FindElementById("meetings--form-date-picker-controller--show-menu--arrow-drop_down");
+        public IWebElement monthdisplayed => _driver.FindElementByXPath("//*[@ng-bind = '$ctrl.calendar.getMonthString()']");
+
+        public IWebElement timeBtn => _driver.FindElementByXPath("//*[@data-placeholder = 'Start time']");
+
+        SetDateTimePageObject setdateTime = new SetDateTimePageObject(_driver);
+        public  AddAgendaPageObject AddMeeting(string meetingName , string meetingDescription, string meetingLocation, string meetingDate, string meetingTime)
         {
             createMeetingBtn.Click();
 
-            Thread.Sleep(4000);
+            Thread.Sleep(3000);
 
             Name.SendKeys(meetingName);
 
@@ -33,9 +39,27 @@ namespace StratsysMeetingsTestSuite
 
             Location.SendKeys(meetingLocation);
 
-            createBtn.Click();
+            dateBtn.Click();
 
-            Thread.Sleep(3000);
+           
+
+            setdateTime.setDate(meetingDate);
+
+            timeBtn.Click();
+
+            Thread.Sleep(500);
+
+            setdateTime.setTime(meetingTime);
+
+            Thread.Sleep(500);
+            try
+            {
+
+                createBtn.Click();
+            }
+            catch{ }
+
+            Thread.Sleep(1000);
 
             AddAgendaPageObject aapo = new AddAgendaPageObject(_driver);
 

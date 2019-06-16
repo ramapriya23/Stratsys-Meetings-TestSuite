@@ -12,114 +12,49 @@ namespace StratsysMeetingsTestSuite
 {
     public class UpdateDateTimePageObject
     {
-        private RemoteWebDriver _driver;
+        private static RemoteWebDriver _driver;
         public UpdateDateTimePageObject(IWebDriver driver) => _driver = (RemoteWebDriver)driver;
 
-        string[] months = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec" };
+     
         public IWebElement infoIconBtn => _driver.FindElementByXPath("//*[@title = 'View meeting details']");
         public IWebElement dateBtn => _driver.FindElementByXPath("//*[@title = 'Date']");
-
-        public IWebElement monthdisplayed => _driver.FindElementByXPath("//*[@ng-bind = '$ctrl.calendar.getMonthString()']");
-
-        public IWebElement nextMonthArrowBtn => _driver.FindElementByXPath("//*[@ng-click = '$ctrl.calendar.nextMonth()']");
-
-        public IReadOnlyCollection<IWebElement> dates => _driver.FindElementsByXPath("//*[@ng-click = '$ctrl.select(day)']");
-        public IWebElement scrollItem => _driver.FindElementById("id1560617841980");  
-
+       
+        public IWebElement scrollItem => _driver.FindElementById("id1560617841980");
         public IWebElement timeBtn => _driver.FindElementByXPath("//*[@title = 'Start time']");
 
-        public IWebElement timeTextbox => _driver.FindElementByXPath("//*[@name = 'start']");
+
+        SetDateTimePageObject sdtpo = new SetDateTimePageObject(_driver);
 
         public void updateMeetingDateTime(string date, string time)
         {
 
 
-            //--------------------------- Update Date
-
-
+            //--------------------------------- Update Date
             infoIconBtn.Click();
+
 
             Thread.Sleep(500);
 
             dateBtn.Click();
 
-            string monthDisplay = monthdisplayed.Text;
+            sdtpo.setDate(date);
+           //----------------------------------------------------------------update time
 
-            DateTime toDateFormat = Convert.ToDateTime(date);
-
-            string _date = toDateFormat.ToString("dd");
-            string month = toDateFormat.ToString("MMM");
-            string year = toDateFormat.ToString("yyyy");
-
-            if (!monthDisplay.Contains(year))
-            {
-
-                int toYear = Convert.ToInt32(year);
-                int currentYear = Convert.ToInt32(monthDisplay.Substring(5, monthDisplay.Length));
-
-                int diff = toYear - currentYear;
-
-                if (diff < 0)
-                {
-                    Console.WriteLine("Cannot book meeting for past year");
-                }
-                else
-                {
-                    while (!monthdisplayed.Text.Contains(year))
-                    {
-                        nextMonthArrowBtn.Click();
-                    }
-
-                }
-            }
-
-            if (!monthDisplay.Contains(month))
-            {
-                int indexofMonthDisplay = Array.IndexOf(months, monthDisplay.Substring(0, 3));
-                int indexOfMonth = Array.IndexOf(months, month);
-
-                if (indexOfMonth < indexofMonthDisplay)
-                {
-                    Console.WriteLine("Cannot book meeting for past year");
-                }
-                else
-                {
-                    while (!monthdisplayed.Text.Contains(month))
-                    {
-                        nextMonthArrowBtn.Click();
-                    }
-                }
-            }
-            foreach(IWebElement x in dates)
-            {
-                if(x.Text == _date)
-                {
-                    x.Click();
-                    break;
-                }
-            }
-            Thread.Sleep(500);
-
-            //---------------------------------Update Time
-
-           _driver.ExecuteScript("arguments[0].scrollIntoView()", timeBtn);
-
-            Thread.Sleep(500);
+            _driver.ExecuteScript("arguments[0].scrollIntoView()", timeBtn);
 
             timeBtn.Click();
 
             Thread.Sleep(500);
 
-            timeTextbox.Clear();
+            sdtpo.setTime(time);
 
-            timeTextbox.SendKeys(time);
+            Thread.Sleep(500);
 
-            timeTextbox.SendKeys(Keys.Enter);
-
-            Thread.Sleep(1000);
-
+           
 
 
         }
+     
+
     }
 }

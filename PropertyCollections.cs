@@ -12,8 +12,6 @@ namespace StratsysMeetingsTestSuite
     class PropertyCollections
     {
         public static IWebDriver driver { get; set; }
-        public static WebDriverWait wait { get; set; }
-
         public static LoginPageObjects lpo { get; set; }
 
     }

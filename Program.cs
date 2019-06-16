@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using NUnit;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -26,9 +26,12 @@ namespace StratsysMeetingsTestSuite
         {
             PropertyCollections.driver = new ChromeDriver();
             PropertyCollections.wait = new WebDriverWait(PropertyCollections.driver, new TimeSpan(0, 0, 5));
+            PropertyCollections.lpo = new LoginPageObjects(PropertyCollections.driver);
             PropertyCollections.driver.Navigate().GoToUrl("https://app.meetings.stratsys.com");
             PropertyCollections.driver.Manage().Window.Maximize();
-            PropertyCollections.lpo = new LoginPageObjects(PropertyCollections.driver);
+            Thread.Sleep(2000);
+
+            
 
         }
 
@@ -43,7 +46,7 @@ namespace StratsysMeetingsTestSuite
 
             // ----TestCase 2  :  Create a new meeting
 
-            AddAgendaPageObject aapo = ampo.AddMeeting("Week 1 : Scrum meeting", "This meeting is to get an update on the progress of the current project", "Conference room 2");
+            AddAgendaPageObject aapo = ampo.AddMeeting("Week 1 : Scrum meeting", "This meeting is to get an update on the progress of the current project", "Conference room 2","07-05-2018","10:00");
 
             // ----TestCase 3  :  Add an agenda point for the meeting
 
